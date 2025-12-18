@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  name: cardconjurer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cardconjurer
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cardconjurer
+    spec:
+      containers:
+      - image: IMAGE
+        imagePullPolicy: IfNotPresent
+        name: container
+        ports:
+        - containerPort: 4242
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: cc
+      serviceAccountName: cc
+      terminationGracePeriodSeconds: 30

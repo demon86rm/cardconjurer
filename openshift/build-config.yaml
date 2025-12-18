@@ -1,0 +1,15 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: cardconjurer 
+spec:
+  runPolicy: "Serial" 
+      type: "ImageChange"
+  source: 
+    git: "https://github.com/demon86rm/cardconjurer"
+    ref: "master"
+    dockerfile: "FROM nginx:1.29.4-alpine as prod\nEXPOSE 4242\nCOPY . /usr/share/nginx/html/\nCOPY app.conf /etc/nginx/nginx.conf"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "cardconjurer:latest"
