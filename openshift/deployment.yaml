@@ -8,21 +8,15 @@ spec:
   selector:
     matchLabels:
       app: cardconjurer
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: cardconjurer
     spec:
       containers:
       - image: IMAGE
-        imagePullPolicy: IfNotPresent
-        name: container
+        imagePullPolicy: Always
+        name: cardconjurer-app
         ports:
         - containerPort: 4242
           protocol: TCP
