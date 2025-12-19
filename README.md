@@ -1,3 +1,17 @@
+# Demon86RM fork of Card Conjurer
+Just to add my two cents:
+sorry, I'm a bad person and I wanted to bring some chaos in this project by changing the directory structure (so the container image won't contain any useless/unwanted stuff like the Makefile and the Dockerfile as well as all the executable launchers), adding the tls generation (beacuse paranoia is a way of living and http plain connection are boring to implement) and last but not least, creating the manifest to deploy this application onto your K8s or Openshift cluster!
+
+To avoid downloading unwanted stuff (mostly in the git history), I'd suggest you to clone this repo by using --depth=1, so instead of 5.5GB and 30K files, you'll download just 2.7GB and 10k files which are the one you'll actually working on/lurking into.
+
+## For Openshift:
+You need to create a secret that holds the tls.key and tls.crt files (you can use the one-liner within the Makefile to generate 'em)
+as well as a configMap that has the app.conf file mapped as the nginx.conf file, otherwise your deployment won't even start.
+For building the image I'd suggest you to do it locally on your workstation, start it for testing and then importing that into your container registry.
+I know it might be a niche use case, but I mean why not running such application on your personal homelab cluster? 
+
+
+-----------------------------------------------------------
 # Card Conjurer
 Card Conjurer was created by a passionate Magic the Gathering player and grew to become probably the most popular online card generator known to the game.
 In November of 2022, Wizards of the Coast served the original creator and webhost of the site with Ceas and Desist paperwork, forcing the site offline.
@@ -6,7 +20,6 @@ This repository is for the purpose of making the application usable on your loca
 - Clone this repo somewhere on your system. (Or download the Zip with CODE > Download Zip above)
 - Run server.exe (or mac-server for MacOS, linux-server for linux)
 - You're good to go! You could also set up Card Conjurer in a more traditional method using WAMP, Docker, XAMPP, etc.
-
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?longCache=true&style=popout)](https://www.paypal.me/kyleburtondonate
 ) ← Help out Card Conjurer's original creator, Kyle. We love you buddy.
